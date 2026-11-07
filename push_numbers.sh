@@ -2,10 +2,10 @@
 set -euo pipefail
 
 NUMBERS_FILE="numbers.md"
-URL="https://ntfy.sh/my-test-room-4755"
-BATCH_SIZE=5
-WAIT_SECONDS=4
-MAX_RETRIES=5
+URL="${1:-${URL:-https://ntfy.sh/my-test-room-4755}}"
+BATCH_SIZE="${BATCH_SIZE:-5}"
+WAIT_SECONDS="${WAIT_SECONDS:-4}"
+MAX_RETRIES="${MAX_RETRIES:-5}"
 
 numbers=()
 while IFS= read -r line; do
