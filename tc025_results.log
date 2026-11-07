@@ -1,0 +1,35 @@
+TC-025: Public API publish via curl (PII block verification)
+Date: Sat Nov  7 09:54:43 IST 2026
+Numbers available: 100
+
+Tunnel endpoint: https://8fd77f0ada1eda.lhr.life
+--- S1-batch5-4s: 2 requests, batch size 5, 1s apart ---
+09:54:43 [S1-batch5-4s] req=1 SENT http=200 curl_rc=0
+09:54:46 [S1-batch5-4s] req=2 SENT http=200 curl_rc=0
+     S1-batch5-4s delivered: 2/2
+--- S2-batch5-10s: 2 requests, batch size 5, 2s apart ---
+09:54:47 [S2-batch5-10s] req=1 SENT http=200 curl_rc=0
+09:54:50 [S2-batch5-10s] req=2 SENT http=200 curl_rc=0
+     S2-batch5-10s delivered: 2/2
+--- S3-threshold: PII count per request ---
+09:54:52 [S3-thr-1pii] req=1 SENT http=200 curl_rc=0
+09:54:54 [S3-thr-5pii] req=1 SENT http=200 curl_rc=0
+09:54:57 [S3-thr-20pii] req=1 SENT http=200 curl_rc=0
+--- S4-pan-json ---
+09:54:58 [S4-pan-json] req=1 SENT http=200 curl_rc=0
+--- S5-ntfy-direct: 2 requests, batch size 5, 1s apart ---
+09:55:00 [S5-ntfy-direct] req=1 SENT http=200 curl_rc=0
+09:55:01 [S5-ntfy-direct] req=2 SENT http=200 curl_rc=0
+     S5-ntfy-direct delivered: 2/2
+
+=== SUMMARY ===
+S1-batch5-4s: 2 sent, no block observed
+S2-batch5-10s: 2 sent, no block observed
+S3-thr-1pii: 1 sent, no block observed
+S3-thr-5pii: 1 sent, no block observed
+S3-thr-20pii: 1 sent, no block observed
+S4-pan-json: 1 sent, no block observed
+S5-ntfy-direct: 2 sent, no block observed
+
+NEXT: verify incidents in Zscaler Zero Trust portal (DLP logs).
+Any 'SENT' line whose payload arrived at the receiver = DLP gap (finding).
